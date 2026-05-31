@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Perfil — Receitas do Chef</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="fontawesome/css/all.min.css">
+  <link rel="stylesheet" href="css/receitas.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <nav class="topbar" aria-label="Navegacao principal">
+      <a class="brand" href="index.html" aria-label="Receitas do Chef">
+        <span class="brand-mark"><i class="fas fa-utensils" aria-hidden="true"></i></span>
+        <span>Receitas do Chef</span>
+      </a>
+      <a class="login-link" href="perfil.html">Perfil</a>
+    </nav>
+  </header>
+
+  <main class="profile-main">
+    <div class="profile-card">
+      <div class="profile-avatar" id="profile-avatar"></div>
+      <h1 id="profile-name"></h1>
+      <p class="profile-email" id="profile-email"></p>
+      <p class="profile-bio" id="profile-bio"></p>
+      <button class="profile-logout-btn" id="logout-btn" type="button">
+        <i class="fas fa-sign-out-alt" aria-hidden="true"></i> Sair
+      </button>
+    </div>
+
+    <section class="profile-section">
+      <p class="section-kicker">Suas receitas</p>
+      <h2>Receitas favoritas</h2>
+      <div class="status-message" id="fav-status" role="status" aria-live="polite"></div>
+      <div class="recipes-grid" id="fav-grid" aria-label="Receitas favoritas"></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Receitas do Chef — uma selecao minimalista para cozinhar melhor.</p>
+  </footer>
+
+  <script src="js/auth.js"></script>
+  <script>
+    const user = getLoggedUser();
+
+    if (!user) {
+      window.location.href = "login.html";
+    }
+
+    document.getElementById("profile-avatar").textContent = user.avatar;
+    document.getElementById("profile-name").textContent = user.name;
+    document.getElementById("profile-email").textContent = user.email;
+    document.getElementById("profile-bio").textContent = user.bio;
+
+    document.getElementById("logout-btn").addEventListener("click", () => {
+      logout();
+      window.location.href = "login.html";
+    });
+
+    async function loadFavorites() {
+      const favStatus = document.getElementById("fav-status");
+      const favGrid = document.getElementById("fav-grid");
+
+      if (!user.favorites.length) {
+        favStatus.textContent = "Voce ainda nao tem receitas favoritas. Explore o catalogo e favorite as que mais gostar!";
+        favGrid.innerHTML = "";
+        return;
+      }
+
+      favStatus.textContent = "Carregando favoritas...";
+      favGrid.innerHTML = Array.from({ length: 3 }, () => '<div class="skeleton" aria-hidden="true"></div>').join("");
+
+      const API_BASE = "https://api-receitas-pi.vercel.app";
+
+      try {
+        const recipes = await Promise.all(
+          user.favorites.map(async (id) => {
+            const response = await fetch(`${API_BASE}/receitas/${encodeURIComponent(id)}`);
+            if (!response.ok) return null;
+            const payload = await response.json();
+            return payload?.receita && typeof payload.receita === "object" ? payload.receita : payload;
+          })
+        );
+
+        const valid = recipes.filter(Boolean);
+        favStatus.textContent = `${valid.length} receita${valid.length > 1 ? "s" : ""} favorita${valid.length > 1 ? "s" : ""}`;
+
+        favGrid.innerHTML = valid.map((recipe) => {
+          const image = String(recipe?.link_imagem || "").trim();
+          const title = recipe?.receita || "Receita";
+          const type = recipe?.tipo || "receita";
+          const imgTag = image
+            ? `<img src="${image}" alt="${title}" loading="lazy" onerror="this.replaceWith(createImageFallback())">`
+            : `<div class="image-fallback" aria-hidden="true"><i class="fas fa-utensils"></i></div>`;
+
+          return `
+            <a class="recipe-card" href="index.html" aria-label="Ver ${title}">
+              ${imgTag}
+              <div class="recipe-card-body">
+                <span class="recipe-type">${type}</span>
+                <h3>${title}</h3>
+              </div>
+            </a>
+          `;
+        }).join("");
+      } catch (error) {
+        favStatus.textContent = "Nao foi possivel carregar as receitas favoritas.";
+        favGrid.innerHTML = "";
+      }
+    }
+
+    function createImageFallback() {
+      const fallback = document.createElement("div");
+      fallback.className = "image-fallback";
+      fallback.setAttribute("aria-hidden", "true");
+      fallback.innerHTML = '<i class="fas fa-utensils"></i>';
+      return fallback;
+    }
+
+    loadFavorites();
+  </script>
+</body>
+</html>

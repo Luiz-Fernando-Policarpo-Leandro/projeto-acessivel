@@ -239,23 +239,26 @@ function setError(message) {
 }
 
 function renderRecipes(recipes, totalItems) {
-    if (!recipes.length) {
-        elements.grid.innerHTML = "";
-        elements.status.textContent = "Nenhuma receita encontrada. Tente outro termo ou filtro.";
-        return;
-    }
+  if (!recipes.length) {
+    elements.grid.innerHTML = "";
+    elements.status.textContent = "Nenhuma receita encontrada. Tente outro termo ou filtro.";
+    return;
+  }
 
-    elements.status.textContent = `${totalItems} receita${totalItems > 1 ? "s" : ""} encontrada${totalItems > 1 ? "s" : ""}.`;
-    elements.grid.innerHTML = recipes.map((recipe) => `
-        <button class="recipe-card" type="button" data-id="${escapeHtml(recipe.id)}" aria-label="Ver detalhes de ${escapeHtml(recipe.receita || "receita")}">
-            ${imageMarkup(recipe, "", true)}
-            <div class="recipe-card-body">
-                <span class="recipe-type">${escapeHtml(recipe.tipo || "receita")}</span>
-                <h3>${escapeHtml(recipe.receita || "Receita sem nome")}</h3>
-                <p>${escapeHtml(summarize(recipe.ingredientes || baseIngredientNames(recipe) || recipe.modo_preparo))}</p>
-            </div>
-        </button>
-    `).join("");
+  elements.status.textContent = `${totalItems} receita${totalItems > 1 ? "s" : ""} encontrada${totalItems > 1 ? "s" : ""}.`;
+  elements.grid.innerHTML = recipes.map((recipe) => {
+    const favIcon = typeof isFavorite === "function" && isFavorite(recipe.id) ? "fas" : "far";
+    return `
+    <button class="recipe-card" type="button" data-id="${escapeHtml(recipe.id)}" aria-label="Ver detalhes de ${escapeHtml(recipe.receita || "receita")}">
+      ${imageMarkup(recipe, "", true)}
+      <div class="recipe-card-body">
+        <span class="recipe-type">${escapeHtml(recipe.tipo || "receita")}</span>
+        <h3>${escapeHtml(recipe.receita || "Receita sem nome")}</h3>
+        <p>${escapeHtml(summarize(recipe.ingredientes || baseIngredientNames(recipe) || recipe.modo_preparo))}</p>
+      </div>
+      <span class="fav-btn" data-fav-id="${escapeHtml(recipe.id)}" aria-label="Favoritar receita"><i class="${favIcon} fa-heart"></i></span>
+    </button>
+  `}).join("");
 }
 
 function getVisibleRecipes() {
@@ -470,10 +473,20 @@ elements.filters.addEventListener("click", (event) => {
 });
 
 elements.grid.addEventListener("click", (event) => {
-    const card = event.target.closest(".recipe-card");
-    if (card?.dataset.id) {
-        showRecipeDetails(card.dataset.id);
-    }
+  const favBtn = event.target.closest(".fav-btn");
+  if (favBtn && typeof toggleFavorite === "function") {
+    event.stopPropagation();
+    toggleFavorite(favBtn.dataset.favId);
+    const icon = favBtn.querySelector("i");
+    icon.classList.toggle("fas");
+    icon.classList.toggle("far");
+    return;
+  }
+
+  const card = event.target.closest(".recipe-card");
+  if (card?.dataset.id) {
+    showRecipeDetails(card.dataset.id);
+  }
 });
 
 elements.prev.addEventListener("click", () => {
