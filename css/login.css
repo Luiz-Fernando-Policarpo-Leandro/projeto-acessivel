@@ -1,0 +1,264 @@
+* {
+box-sizing: border-box;
+margin: 0;
+padding: 0;
+font-family: 'Nunito', sans-serif;
+}
+
+body {
+background-image: url('../img/login-background.e9bfdc3e.jpg');
+display: flex;
+flex-direction: column;
+min-height: 100vh;
+}
+
+header {
+background-color: #ffffff;
+width: 100%;
+padding: 15px 0;
+text-align: center;
+border-bottom: 1px solid #e0e0e0;
+box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+}
+
+.logo-container {
+display: flex;
+justify-content: center;
+align-items: center;
+gap: 5px;
+font-size: 24px;
+font-weight: 800;
+}
+
+.logo-clube {
+color: #f3b14e;
+font-style: italic;
+font-weight: 400;
+}
+
+.logo-tudo {
+color: #ff6a28;
+text-transform: uppercase;
+}
+
+.logo-gostoso {
+color: #ff6a28;
+text-transform: uppercase;
+}
+
+.chef-hat {
+color: #ff6a28;
+margin: 0 -2px;
+}
+
+.main-container {
+flex: 1;
+background: url('../image_86b81f.jpg') center center/cover no-repeat;
+display: flex;
+justify-content: center;
+align-items: center;
+padding: 40px 20px;
+position: relative;
+}
+
+.login-card {
+background-color: rgba(255, 255, 255, 0.98);
+width: 100%;
+max-width: 420px;
+border-radius: 8px;
+padding: 35px 30px;
+box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+text-align: center;
+}
+
+.login-card h2 {
+color: #333333;
+font-size: 26px;
+font-weight: 800;
+margin-bottom: 25px;
+}
+
+.btn-social {
+display: flex;
+align-items: center;
+justify-content: center;
+width: 100%;
+padding: 10px;
+border: none;
+border-radius: 20px;
+color: #ffffff;
+font-size: 13px;
+font-weight: 700;
+cursor: pointer;
+margin-bottom: 12px;
+transition: opacity 0.2s;
+}
+
+.btn-social:hover {
+opacity: 0.9;
+}
+
+.btn-facebook {
+background-color: #3b5998;
+}
+
+.btn-google {
+background-color: #e14b3b;
+}
+
+.btn-social i {
+margin-right: 8px;
+font-size: 15px;
+}
+
+.divider {
+display: flex;
+align-items: center;
+text-align: center;
+color: #666666;
+font-size: 12px;
+font-weight: 600;
+margin: 20px 0;
+}
+
+.divider::before, .divider::after {
+content: '';
+flex: 1;
+border-bottom: 1px solid #e0e0e0;
+}
+
+.divider:not(:empty)::before { margin-right: .5em; }
+.divider:not(:empty)::after { margin-left: .5em; }
+
+.form-group {
+text-align: left;
+margin-bottom: 18px;
+}
+
+.form-group label {
+display: block;
+font-size: 13px;
+font-weight: 700;
+color: #333333;
+margin-bottom: 6px;
+}
+
+.input-wrapper {
+position: relative;
+display: flex;
+align-items: center;
+}
+
+.form-control {
+width: 100%;
+padding: 10px 12px;
+border: 1px solid #cccccc;
+border-radius: 4px;
+font-size: 14px;
+color: #333333;
+outline: none;
+}
+
+.form-control::placeholder {
+color: #999999;
+}
+
+.toggle-password {
+position: absolute;
+right: 12px;
+color: #888888;
+cursor: pointer;
+font-size: 14px;
+}
+
+.forgot-password {
+display: block;
+font-size: 12px;
+font-weight: 700;
+color: #333333;
+text-decoration: none;
+margin: 15px 0;
+}
+
+.remember-me {
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 8px;
+font-size: 13px;
+color: #666666;
+margin-bottom: 25px;
+}
+
+.remember-me input[type="checkbox"] {
+accent-color: #ff6a28;
+width: 16px;
+height: 16px;
+cursor: pointer;
+}
+
+.btn-submit {
+background-color: #ff6a28;
+color: white;
+border: none;
+padding: 10px 30px;
+font-size: 14px;
+font-weight: 700;
+border-radius: 20px;
+cursor: pointer;
+display: inline-flex;
+align-items: center;
+gap: 5px;
+box-shadow: 0 2px 5px rgba(255, 106, 40, 0.3);
+transition: background 0.2s;
+}
+
+.btn-submit:hover {
+background-color: #e5591f;
+}
+
+.register-text {
+margin-top: 25px;
+font-size: 13px;
+color: #333333;
+font-weight: 700;
+}
+
+.register-text a {
+color: #ff6a28;
+text-decoration: none;
+}
+
+.cookie-bar {
+background-color: #dcdcdc;
+color: #555555;
+font-size: 11px;
+padding: 10px 20px;
+text-align: center;
+display: flex;
+justify-content: center;
+align-items: center;
+gap: 15px;
+border-top: 1px solid #cccccc;
+}
+
+.cookie-bar p {
+max-width: 900px;
+line-height: 1.4;
+}
+
+.cookie-bar a {
+color: #333333;
+text-decoration: underline;
+}
+
+.btn-cookie-ok {
+background-color: #4a6572;
+color: white;
+border: none;
+padding: 4px 12px;
+font-size: 11px;
+font-weight: bold;
+border-radius: 3px;
+cursor: pointer;
+}
