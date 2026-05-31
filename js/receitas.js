@@ -504,3 +504,58 @@ document.addEventListener("keydown", (event) => {
 });
 
 setActiveFilter("todos");
+
+
+const accessibilityBtn =
+document.getElementById("accessibility-btn");
+
+const accessibilityPanel =
+document.getElementById("accessibility-panel");
+
+const closePanel =
+document.getElementById("close-panel");
+
+/* Abrir painel */
+
+accessibilityBtn.addEventListener("click", () => {
+    accessibilityPanel.classList.add("open");
+});
+
+/* Fechar painel */
+
+closePanel.addEventListener("click", () => {
+    accessibilityPanel.classList.remove("open");
+});
+
+/* Trocar tema */
+
+function setTheme(theme){
+
+    document.body.classList.remove(
+        "dark-mode",
+        "contrast-light",
+        "contrast-dark"
+    );
+
+    if(theme === "dark"){
+        document.body.classList.add("dark-mode");
+    }
+
+    if(theme === "contrast-light"){
+        document.body.classList.add("contrast-light");
+    }
+
+    if(theme === "contrast-dark"){
+        document.body.classList.add("contrast-dark");
+    }
+
+    localStorage.setItem("theme", theme);
+}
+
+/* Carregar tema salvo */
+
+const savedTheme = localStorage.getItem("theme");
+
+if(savedTheme){
+    setTheme(savedTheme);
+}
