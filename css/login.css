@@ -90,15 +90,22 @@ header {
   border: none;
   border-radius: 20px;
   color: #ffffff;
-  font-size: 0.8125rem; /* Convertido de 13px */
+  font-size: 0.8125rem;
   font-weight: 700;
   cursor: pointer;
   margin-bottom: 12px;
-  transition: opacity 0.2s;
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.25s ease, opacity 0.2s;
 }
 
 .btn-social:hover {
   opacity: 0.9;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.btn-social:active {
+  transform: translateY(0);
+  box-shadow: none;
 }
 
 .btn-facebook {
@@ -162,9 +169,20 @@ header {
   padding: 10px 12px;
   border: 1px solid #cccccc;
   border-radius: 4px;
-  font-size: 0.875rem; /* Convertido de 14px */
+  font-size: 0.875rem;
   color: #333333;
   outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.form-control:hover {
+  border-color: #ff8c5a;
+}
+
+.form-control:focus {
+  border-color: #ff6a28;
+  box-shadow: 0 0 0 3px rgba(255, 106, 40, 0.15);
+  transform: translateY(-1px);
 }
 
 .form-control::placeholder {
@@ -213,7 +231,7 @@ header {
   color: white;
   border: none;
   padding: 10px 30px;
-  font-size: 0.875rem; /* Convertido de 14px */
+  font-size: 0.875rem;
   font-weight: 700;
   border-radius: 20px;
   cursor: pointer;
@@ -221,11 +239,18 @@ header {
   align-items: center;
   gap: 5px;
   box-shadow: 0 2px 5px rgba(255, 106, 40, 0.3);
-  transition: background 0.2s;
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.25s ease, background-color 0.2s ease;
 }
 
 .btn-submit:hover {
   background-color: #e5591f;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(255, 106, 40, 0.35);
+}
+
+.btn-submit:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 5px rgba(255, 106, 40, 0.3);
 }
 
 .register-text {
@@ -272,6 +297,17 @@ header {
   font-weight: bold;
   border-radius: 3px;
   cursor: pointer;
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.25s ease;
+}
+
+.btn-cookie-ok:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 3px 8px rgba(74, 101, 114, 0.3);
+}
+
+.btn-cookie-ok:active {
+  transform: translateY(0);
+  box-shadow: none;
 }
 
 #bg-canvas {

@@ -183,20 +183,27 @@ button {
 
 .pill,
 .page-btn {
-    border: 1px solid var(--line);
-    background: var(--surface);
-    color: var(--muted);
-    border-radius: 999px;
-    padding: 10px 16px;
-    font-weight: 800;
-    transition: transform 0.2s ease, border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--muted);
+  border-radius: 999px;
+  padding: 10px 16px;
+  font-weight: 800;
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.25s ease, border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
 }
 
 .pill:hover,
 .page-btn:hover:not(:disabled) {
-    transform: translateY(-1px);
-    border-color: var(--accent);
-    color: var(--accent-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(185, 111, 82, 0.12);
+  border-color: var(--accent);
+  color: var(--accent-dark);
+}
+
+.pill:active,
+.page-btn:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: none;
 }
 
 .pill.active,
@@ -708,12 +715,19 @@ button {
   font: inherit;
   font-weight: 700;
   cursor: pointer;
-  transition: border-color 0.2s ease, color 0.2s ease;
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.25s ease, border-color 0.2s ease, color 0.2s ease;
 }
 
 .profile-logout-btn:hover {
   border-color: #c0392b;
   color: #c0392b;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(192, 57, 43, 0.12);
+}
+
+.profile-logout-btn:active {
+  transform: translateY(0);
+  box-shadow: none;
 }
 
 .profile-section {
