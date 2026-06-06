@@ -1,140 +1,240 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Clube TudoGostoso - Login</title>
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<link rel="stylesheet" href="css/login.css">
-<link rel="stylesheet" href="css/accessibility.css">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Clube TudoGostoso - Login</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="css/login.css" />
+    <link rel="stylesheet" href="css/accessibility.css" />
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://unpkg.com/three@0.163.0/build/three.module.js",
+          "three/addons/": "https://unpkg.com/three@0.163.0/examples/jsm/"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <!-- Three.js Background -->
+    <canvas
+      id="bg-canvas"
+      style="
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        pointer-events: none;
+      "
+    ></canvas>
 
-<!-- VLibras -->
-<div vw class="enabled">
-<div vw-access-button class="active"></div>
-<div vw-plugin-wrapper>
-<div class="vw-plugin-top-wrapper"></div>
-</div>
-</div>
-
-<!-- Skip Link -->
-<a href="#main-content" class="skip-link">Pular para o conteúdo principal</a>
-
-<!-- Header / Logo -->
-<header>
-<div class="logo-container">
-<span class="logo-clube">Clube</span>
-<span class="logo-tudo">Tudo</span>
-<span class="chef-hat"><i class="fa-solid fa-utensils" aria-hidden="true"></i></span>
-<span class="logo-gostoso">Gostoso</span>
-</div>
-</header>
-
-<!-- Main Container Background -->
-<main class="main-container" id="main-content" tabindex="-1">
-
-<!-- Login Card -->
-<div class="login-card">
-<h2>Entrar</h2>
-
-<!-- Social Logins -->
-<button class="btn-social btn-facebook" aria-label="Entrar com o Facebook">
-<i class="fa-brands fa-facebook-f"></i> Entrar com o Facebook
-</button>
-<button class="btn-social btn-google" aria-label="Entrar com o Google">
-<i class="fa-brands fa-google"></i> Entrar com o Google
-</button>
-
-<div class="divider">ou</div>
-
-<!-- Credentials Form -->
-<form action="#" method="POST" aria-label="Formulário de login">
-<div class="form-group">
-<label for="email">E-mail</label>
-<div class="input-wrapper">
-<input type="email" id="email" class="form-control" placeholder="alex@cuisine.com" required autocomplete="email">
-</div>
-</div>
-
-<div class="form-group">
-<label for="password">Senha</label>
-<div class="input-wrapper">
-<input type="password" id="password" class="form-control" required autocomplete="current-password">
-<button type="button" class="toggle-password" aria-label="Alternar visibilidade da senha">
-<i class="fa-regular fa-eye"></i>
-</button>
-</div>
-</div>
-
-<a href="#" class="forgot-password">Esqueceu sua senha?</a>
-
-<div class="remember-me">
-<input type="checkbox" id="keep-logged">
-<label for="keep-logged">Permanecer conectado.</label>
-</div>
-
-<button type="submit" class="btn-submit" aria-label="Entrar na conta">
-Entrar <i class="fa-solid fa-chevron-right" style="font-size: 11px;" aria-hidden="true"></i>
-</button>
-</form>
-
-<p class="register-text">Não possui uma conta? <a href="#">Cadastre-se.</a></p>
-</div>
-
-</main>
-
-<!-- Cookie Consent Footer -->
-<footer class="cookie-bar">
-<p>Caso você continue navegando no TudoGostoso, você aceita o uso de cookies. Este site usa cookies para assegurar a performance de nossos serviços. <a href="#">Leia nossa política de privacidade.</a></p>
-<button class="btn-cookie-ok" aria-label="Aceitar cookies">OK</button>
-</footer>
-
-<!-- Botão de Acessibilidade -->
-<button id="accessibility-btn" class="accessibility-btn" aria-label="Opções de acessibilidade" aria-expanded="false">
-<i class="fas fa-universal-access"></i>
-</button>
-
-<!-- Painel de Acessibilidade -->
-<div id="accessibility-panel" class="accessibility-panel" role="dialog" aria-label="Painel de acessibilidade">
-<div class="panel-header">
-<h3>Acessibilidade</h3>
-<button id="close-panel" aria-label="Fechar painel de acessibilidade">
-<i class="fas fa-times"></i>
-</button>
-</div>
-<div class="panel-content">
-<div class="section-title">Ajuste de Cor</div>
-<button class="access-option" onclick="setTheme('default')">Modo Padrão</button>
-<button class="access-option" onclick="setTheme('dark')">Modo Escuro</button>
-<button class="access-option" onclick="setTheme('contrast-light')">Alto Contraste Claro</button>
-<button class="access-option" onclick="setTheme('contrast-dark')">Alto Contraste Escuro</button>
-<div class="panel-content">
-
-    
-    <div class="section-title" style="margin-top: 20px;">Tamanho da Fonte</div>
-    <button class="access-option" onclick="alterarFonte('aumentar')" aria-label="Aumentar tamanho do texto">
-        Aumentar Fonte <i class="fas fa-plus" aria-hidden="true"></i>
-    </button>
-    <button class="access-option" onclick="alterarFonte('diminuir')" aria-label="Diminuir tamanho do texto">
-        Diminuir Fonte <i class="fas fa-minus" aria-hidden="true"></i>
-    </button>
-    <button class="access-option" onclick="alterarFonte('resetar')" aria-label="Restaurar tamanho padrão">
-        Tamanho Padrão
-    </button>
+    <!-- VLibras -->
+    <div vw class="enabled">
+      <div vw-access-button class="active"></div>
+      <div vw-plugin-wrapper>
+        <div class="vw-plugin-top-wrapper"></div>
+      </div>
     </div>
-</div>
-</div>
 
-<script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
-<script>new window.VLibras.Widget('https://vlibras.gov.br/app');</script>
-<script src="js/auth.js"></script>
-<script src="js/login.js"></script>
-<script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+    <!-- Skip Link -->
+    <a href="#main-content" class="skip-link"
+      >Pular para o conteúdo principal</a
+    >
 
-<script src="js/scroll-suave.js"></script>
-<script src="js/accessibility.js"></script>
+    <!-- Header / Logo -->
+    <header>
+      <div class="logo-container">
+        <span class="logo-clube">Clube</span>
+        <span class="logo-tudo">Tudo</span>
+        <span class="chef-hat"
+          ><i class="fa-solid fa-utensils" aria-hidden="true"></i
+        ></span>
+        <span class="logo-gostoso">Gostoso</span>
+      </div>
+    </header>
 
-</body>
+    <!-- Main Container Background -->
+    <main class="main-container" id="main-content" tabindex="-1">
+      <!-- Login Card -->
+      <div class="login-card animate-in">
+        <h2 class="stagger-1">Entrar</h2>
+
+        <!-- Social Logins -->
+        <button
+          class="btn-social btn-facebook stagger-2"
+          aria-label="Entrar com o Facebook"
+        >
+          <i class="fa-brands fa-facebook-f"></i> Entrar com o Facebook
+        </button>
+        <button
+          class="btn-social btn-google stagger-3"
+          aria-label="Entrar com o Google"
+        >
+          <i class="fa-brands fa-google"></i> Entrar com o Google
+        </button>
+
+        <div class="divider stagger-4">ou</div>
+
+        <!-- Credentials Form -->
+        <form action="#" method="POST" aria-label="Formulário de login">
+          <div class="form-group stagger-5">
+            <label for="email">E-mail</label>
+            <div class="input-wrapper">
+              <input
+                type="email"
+                id="email"
+                class="form-control"
+                placeholder="alex@cuisine.com"
+                required
+                autocomplete="email"
+              />
+            </div>
+          </div>
+
+          <div class="form-group stagger-6">
+            <label for="password">Senha</label>
+            <div class="input-wrapper">
+              <input
+                type="password"
+                id="password"
+                class="form-control"
+                required
+                autocomplete="current-password"
+              />
+              <button
+                type="button"
+                class="toggle-password"
+                aria-label="Alternar visibilidade da senha"
+              >
+                <i class="fa-regular fa-eye"></i>
+              </button>
+            </div>
+          </div>
+
+          <a href="#" class="forgot-password stagger-7">Esqueceu sua senha?</a>
+
+          <div class="remember-me stagger-8">
+            <input type="checkbox" id="keep-logged" />
+            <label for="keep-logged">Permanecer conectado.</label>
+          </div>
+
+          <button
+            type="submit"
+            class="btn-submit stagger-9"
+            aria-label="Entrar na conta"
+          >
+            Entrar
+            <i
+              class="fa-solid fa-chevron-right"
+              style="font-size: 11px"
+              aria-hidden="true"
+            ></i>
+          </button>
+        </form>
+
+        <p class="register-text stagger-10">
+          Não possui uma conta? <a href="#">Cadastre-se.</a>
+        </p>
+      </div>
+    </main>
+
+    <!-- Cookie Consent Footer -->
+    <footer class="cookie-bar">
+      <p>
+        Caso você continue navegando no TudoGostoso, você aceita o uso de
+        cookies. Este site usa cookies para assegurar a performance de nossos
+        serviços. <a href="#">Leia nossa política de privacidade.</a>
+      </p>
+      <button class="btn-cookie-ok" aria-label="Aceitar cookies">OK</button>
+    </footer>
+
+    <!-- Botão de Acessibilidade -->
+    <button
+      id="accessibility-btn"
+      class="accessibility-btn"
+      aria-label="Opções de acessibilidade"
+      aria-expanded="false"
+    >
+      <i class="fas fa-universal-access"></i>
+    </button>
+
+    <!-- Painel de Acessibilidade -->
+    <div
+      id="accessibility-panel"
+      class="accessibility-panel"
+      role="dialog"
+      aria-label="Painel de acessibilidade"
+    >
+      <div class="panel-header">
+        <h3>Acessibilidade</h3>
+        <button id="close-panel" aria-label="Fechar painel de acessibilidade">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="panel-content">
+        <div class="section-title">Ajuste de Cor</div>
+        <button class="access-option" onclick="setTheme('default')">
+          Modo Padrão
+        </button>
+        <button class="access-option" onclick="setTheme('dark')">
+          Modo Escuro
+        </button>
+        <button class="access-option" onclick="setTheme('contrast-light')">
+          Alto Contraste Claro
+        </button>
+        <button class="access-option" onclick="setTheme('contrast-dark')">
+          Alto Contraste Escuro
+        </button>
+        <div class="panel-content">
+          <div class="section-title" style="margin-top: 20px">
+            Tamanho da Fonte
+          </div>
+          <button
+            class="access-option"
+            onclick="alterarFonte('aumentar')"
+            aria-label="Aumentar tamanho do texto"
+          >
+            Aumentar Fonte <i class="fas fa-plus" aria-hidden="true"></i>
+          </button>
+          <button
+            class="access-option"
+            onclick="alterarFonte('diminuir')"
+            aria-label="Diminuir tamanho do texto"
+          >
+            Diminuir Fonte <i class="fas fa-minus" aria-hidden="true"></i>
+          </button>
+          <button
+            class="access-option"
+            onclick="alterarFonte('resetar')"
+            aria-label="Restaurar tamanho padrão"
+          >
+            Tamanho Padrão
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+
+    <script>
+      new window.VLibras.Widget("https://vlibras.gov.br/app");
+    </script>
+    <script src="js/auth.js"></script>
+    <script src="js/login.js"></script>
+    <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+
+    <script src="js/scroll-suave.js"></script>
+    <script src="js/accessibility.js"></script>
+    <script type="module" src="js/threejs-login.js"></script>
+  </body>
 </html>

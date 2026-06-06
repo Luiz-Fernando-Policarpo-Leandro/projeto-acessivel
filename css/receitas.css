@@ -183,20 +183,27 @@ button {
 
 .pill,
 .page-btn {
-    border: 1px solid var(--line);
-    background: var(--surface);
-    color: var(--muted);
-    border-radius: 999px;
-    padding: 10px 16px;
-    font-weight: 800;
-    transition: transform 0.2s ease, border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--muted);
+  border-radius: 999px;
+  padding: 10px 16px;
+  font-weight: 800;
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.25s ease, border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
 }
 
 .pill:hover,
 .page-btn:hover:not(:disabled) {
-    transform: translateY(-1px);
-    border-color: var(--accent);
-    color: var(--accent-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(185, 111, 82, 0.12);
+  border-color: var(--accent);
+  color: var(--accent-dark);
+}
+
+.pill:active,
+.page-btn:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: none;
 }
 
 .pill.active,
@@ -708,12 +715,19 @@ button {
   font: inherit;
   font-weight: 700;
   cursor: pointer;
-  transition: border-color 0.2s ease, color 0.2s ease;
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.25s ease, border-color 0.2s ease, color 0.2s ease;
 }
 
 .profile-logout-btn:hover {
   border-color: #c0392b;
   color: #c0392b;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(192, 57, 43, 0.12);
+}
+
+.profile-logout-btn:active {
+  transform: translateY(0);
+  box-shadow: none;
 }
 
 .profile-section {
@@ -921,6 +935,67 @@ button {
   width: 400px;
   height: 400px;
   outline: none;
+}
+
+#bg-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.animate-in .stagger-1,
+.animate-in .stagger-2,
+.animate-in .stagger-3,
+.animate-in .stagger-4,
+.animate-in .stagger-5,
+.animate-in .stagger-6,
+.animate-in .stagger-7,
+.animate-in .stagger-8,
+.animate-in .stagger-9 {
+  opacity: 0;
+  transform: translateY(24px);
+  animation: fadeSlideUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.animate-in .stagger-1 { animation-delay: 0.1s; }
+.animate-in .stagger-2 { animation-delay: 0.18s; }
+.animate-in .stagger-3 { animation-delay: 0.26s; }
+.animate-in .stagger-4 { animation-delay: 0.34s; }
+.animate-in .stagger-5 { animation-delay: 0.42s; }
+.animate-in .stagger-6 { animation-delay: 0.5s; }
+.animate-in .stagger-7 { animation-delay: 0.58s; }
+.animate-in .stagger-8 { animation-delay: 0.66s; }
+.animate-in .stagger-9 { animation-delay: 0.74s; }
+
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-in .stagger-1,
+  .animate-in .stagger-2,
+  .animate-in .stagger-3,
+  .animate-in .stagger-4,
+  .animate-in .stagger-5,
+  .animate-in .stagger-6,
+  .animate-in .stagger-7,
+  .animate-in .stagger-8,
+  .animate-in .stagger-9 {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
 }
 
 @media (max-width: 900px) {
